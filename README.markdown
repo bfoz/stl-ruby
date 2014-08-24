@@ -23,3 +23,8 @@ require 'stl'
 
 faces = STL.read('my_awesome.stl')	# => [[normal, Triangle], ...]
 ```
+
+License
+-------
+
+Copyright 2014 Brandon Fosdick <bfoz@bfoz.net> and released under the BSD license.
