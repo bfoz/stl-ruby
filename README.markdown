@@ -1,6 +1,6 @@
 # STL
 
-Read, write and manipulate [STL files](http://en.wikipedia.org/wiki/STL_(file_format))
+Read, write and manipulate both ASCII and binary [STL files](http://en.wikipedia.org/wiki/STL_(file_format))
 
 ## Installation
 
@@ -18,4 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'stl'
+
+faces = STL.read('my_awesome.stl')	# => [[normal, Triangle], ...]
+```
