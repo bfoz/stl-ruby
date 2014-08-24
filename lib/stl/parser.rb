@@ -32,7 +32,8 @@ module STL
 		    when /vertex (.+) (.+) (.+)/
 			stack.push Vector[Float($1), Float($2), Float($3)]
 		    when /endloop/
-			triangles.push [stack.pop, Geometry::Triangle.new(*stack.pop(3))]
+			normal, *vertices = stack.pop(4)
+			triangles.push [normal, Geometry::Triangle.new(*vertices)]
 		end
 	    end
 	    triangles
