@@ -10,7 +10,8 @@ module STL
 	    #  the word 'solid'. The first non-whitespace characters of an ASCII
 	    #  STL file should contain 'solid'.
 	    if io.gets(80).include?('solid')
-		self.new.parse_ascii(io.rewind)
+		io.rewind
+		self.new.parse_ascii(io)
 	    else
 		self.new.parse_binary(io)
 	    end
