@@ -48,7 +48,7 @@ module STL
 	    faces = []
 	    while not io.eof?
 		normal, *vertices = io.read(50).unpack('F3F3F3F3x2').each_slice(3).to_a
-		faces.push [normal, Geometry::Triangle.new(*vertices)]
+		faces.push [Vector[*normal], Geometry::Triangle.new(*vertices)]
 	    end
 	    raise StandardError, "Unexpected end of file after #{faces.length} triangles" if faces.length != count
 
