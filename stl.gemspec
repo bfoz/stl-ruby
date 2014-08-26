@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
     spec.name          = 'stl'
-    spec.version       = '0.1'
+    spec.version       = '0.2'
     spec.authors       = ["Brandon Fosdick"]
     spec.email         = ["bfoz@bfoz.net"]
     spec.description   = %q{Read and write STL files}
