@@ -27,9 +27,9 @@ module STL
 		case line
 		    when /solid (.*)/
 			name = $1
-		    when /facet normal (.+) (.+) (.+)/
+		    when /facet normal\s+(\S+)\s+(\S+)\s+(\S+)/
 			stack.push Vector[Float($1), Float($2), Float($3)]
-		    when /vertex (.+) (.+) (.+)/
+		    when /vertex\s+(\S+)\s+(\S+)\s+(\S+)/
 			stack.push Vector[Float($1), Float($2), Float($3)]
 		    when /endloop/
 			normal, *vertices = stack.pop(4)
