@@ -10,6 +10,10 @@ describe STL do
     describe 'when reading from a file' do
 	subject { STL.read('test/fixtures/triangle.stl') }
 
+	it 'must have a name' do
+	    subject.name.must_equal 'Triangle'
+	end
+
 	it 'must have faces' do
 	    subject.faces.length.must_equal 1
 	end

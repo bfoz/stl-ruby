@@ -27,6 +27,7 @@ class STL
 	    triangles = []
 	    max = nil
 	    min = nil
+	    name = nil
 	    io.each do |line|
 		case line
 		    when /solid (.*)/
@@ -54,7 +55,7 @@ class STL
 			triangles.push [normal, Geometry::Triangle.new(*vertices)]
 		end
 	    end
-	    STL.new triangles, min:min, max:max
+	    STL.new triangles, min:min, max:max, name:name
 	end
 
 	# Parse a binary STL file, assuming that the header has already been read
