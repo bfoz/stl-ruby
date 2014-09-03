@@ -1,0 +1,9 @@
+solid Triangle
+  facet normal 4.609281E-02 9.989371E-01 0.000000E+00
+    outer loop
+      vertex -6.522903E-02 2.367240E+01 1.000000E+01
+      vertex 2.255492E+00 2.356532E+01 1.000000E+01
+      vertex 2.255492E+00 2.356532E+01 7.000382E+00
+    endloop
+  endfacet
+endsolid
