@@ -5,6 +5,14 @@ class STL
     #   @return [Array]  the list of faces
     attr_reader :faces
 
+    # @!attribute max
+    #   @return [Point]  the maximum extent of the solid
+    attr_reader :max
+
+    # @!attribute min
+    #   @return [Point]  the minimum extent of the solid
+    attr_reader :min
+
     # Read an STL file
     # @param filename [String]	The path to the file to read
     # @return [STL] the resulting {STL} object
@@ -47,7 +55,15 @@ class STL
 	end
     end
 
-    def initialize(faces)
+    def initialize(faces, min:nil, max:nil)
 	@faces = faces
+	@max = max
+	@min = min
+    end
+
+    # @!attribute minmax
+    #   @return [Array]  the min and the max
+    def minmax
+	[min, max]
     end
 end
