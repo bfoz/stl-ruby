@@ -2,7 +2,7 @@ require_relative 'stl/parser'
 
 class STL
     # @!attribute faces
-    #   @return [Array]  the list of faces
+    #   @return [Array<Face>]  the list of faces
     attr_reader :faces
 
     # @!attribute max
@@ -26,16 +26,16 @@ class STL
 
     # Write to an STL file
     # @param filename	[String]    The path to write to
-    # @param faces	[Array]	    An array of faces to write: [[Normal, Triangle], ...]
+    # @param faces	[Face]	    An array of faces to write
     # @param format	[Symbol]    Pass :ascii to write an ASCII formatted file, and :binary to write a binary file
     def self.write(filename, faces, format=:binary)
 	File.open(filename, 'w') do |file|
 	    if format == :ascii
 		file.puts "solid #{name}"
-		faces.each do |normal, triangle|
-		    file.puts "    facet normal %E %E %E" % [*normal]
+		faces.each do |face|
+		    file.puts "    facet normal %E %E %E" % [*face.normal]
 		    file.puts "\touter loop"
-		    triangle.points.each do |point|
+		    face.points.each do |point|
 			file.puts "\t    vertex %E %E %E" % [*point]
 		    end
 		    file.puts "\tendloop"
@@ -46,10 +46,10 @@ class STL
 		file.write 'STL Ruby'.ljust(80, "\0")	# A meager header
 		file.write [faces.length].pack('V')	# The triangle count
 
-		faces.each do |normal, triangle|
-		    file.write normal.to_a.pack("FFF")
+		faces.each do |face|
+		    file.write face.normal.to_a.pack("FFF")
 
-		    triangle.points.each do |point|
+		    face.points.each do |point|
 			file.write point.to_a.pack("FFF")
 		    end
 

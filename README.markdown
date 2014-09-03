@@ -21,7 +21,8 @@ Or install it yourself as:
 ```ruby
 require 'stl'
 
-faces = STL.read('my_awesome.stl')	# => [[normal, Triangle], ...]
+stl = STL.read('my_awesome.stl')
+stl.faces			    # => [Face, ...]
 ```
 
 License

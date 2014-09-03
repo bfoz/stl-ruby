@@ -16,6 +16,7 @@ describe STL do
 
 	it 'must have faces' do
 	    subject.faces.length.must_equal 1
+	    subject.faces.first.must_be_instance_of STL::Face
 	end
 
 	it 'must have a minimum' do
