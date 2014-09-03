@@ -1,6 +1,6 @@
 require 'geometry'
 
-module STL
+class STL
     # http://en.wikipedia.org/wiki/STL_(file_format)
     class Parser
 	# @param io [IO]    the stream to parse
@@ -36,7 +36,7 @@ module STL
 			triangles.push [normal, Geometry::Triangle.new(*vertices)]
 		end
 	    end
-	    triangles
+	    STL.new triangles
 	end
 
 	# Parse a binary STL file, assuming that the header has already been read
@@ -52,7 +52,7 @@ module STL
 	    end
 	    raise StandardError, "Unexpected end of file after #{faces.length} triangles" if faces.length != count
 
-	    faces
+	    STL.new faces
 	end
     end
 end

@@ -1,6 +1,10 @@
 require_relative 'stl/parser'
 
-module STL
+class STL
+    # @!attribute faces
+    #   @return [Array]  the list of faces
+    attr_reader :faces
+
     # Read an STL file
     # @param filename [String]	The path to the file to read
     # @return [STL] the resulting {STL} object
@@ -41,5 +45,9 @@ module STL
 		end
 	    end
 	end
+    end
+
+    def initialize(faces)
+	@faces = faces
     end
 end
