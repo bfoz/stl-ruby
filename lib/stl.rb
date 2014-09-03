@@ -71,4 +71,11 @@ class STL
     def minmax
 	[min, max]
     end
+
+    # Write the entire model to the given file
+    # @param filename   [String]	The path to write to
+    # @param format	    [Symbol]    Pass :ascii to write an ASCII formatted file, and :binary to write a binary file
+    def write(filename, format=:binary)
+	self.class.write(filename, faces, format)
+    end
 end

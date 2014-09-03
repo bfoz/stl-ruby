@@ -25,6 +25,24 @@ stl = STL.read('my_awesome.stl')
 stl.faces			    # => [Face, ...]
 ```
 
+To convert an ASCII STL file to a binary file:
+
+```ruby
+STL.read('ascii.stl').write('binary.stl', :binary)
+```
+
+Writing binaries files is actually the default, so you can also leave off the last argument to write, if you want.
+
+```ruby
+STL.read('ascii.stl').write('binary.stl')
+```
+
+You can also convert binary files to ASCII.
+
+```ruby
+STL.read('binary.stl').write('ascii.stl', :ascii)
+```
+
 License
 -------
 
