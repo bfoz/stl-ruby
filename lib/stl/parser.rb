@@ -54,7 +54,7 @@ class STL
 			end
 		    when /endloop/
 			normal, *vertices = stack.pop(4)
-			faces.push Face.new(*normal, *vertices)
+			faces.push Face.new(normal, *vertices)
 		end
 	    end
 	    STL.new faces, min:min, max:max, name:name
@@ -64,6 +64,7 @@ class STL
 	# @param io [IO]	the stream to parse
 	# @return [Array<Face>] An array of {Face}s
 	def parse_binary(io)
+	    io.seek(80, IO::SEEK_SET)	# Skip the header bytes
 	    count = io.read(4).unpack('V').first
 
 	    faces = []

@@ -43,6 +43,19 @@ You can also convert binary files to ASCII.
 STL.read('binary.stl').write('ascii.stl', :ascii)
 ```
 
+### Converting between ASCII and binary
+
+There's an easier way to do a format conversion, and it doesn't require that you
+know the original format. Simply use the `convert` method, and the format of the
+input will be toggled (ASCII to binary, or binary to ASCII). The converted
+filename will be the same as the original, but with '-ascii' or '-binary'
+appended, as appropriate.
+
+```ruby
+STL.convert('ascii.stl')	# => ascii-binary.stl
+STL.convert('binary.stl')	# => binary-ascii.stl
+```
+
 License
 -------
 

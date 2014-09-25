@@ -7,7 +7,31 @@ describe STL do
 	stl.must_be_instance_of STL
     end
 
-    describe 'when reading from a file' do
+    it 'must recognize an ASCII file' do
+	File.open 'test/fixtures/ascii_triangle.stl' do |f|
+	    STL.ascii?(f).must_equal true
+	end
+    end
+
+    it 'must recognize a binary file' do
+	File.open 'test/fixtures/binary_triangle.stl' do |f|
+	    STL.ascii?(f).must_equal false
+	end
+    end
+
+    it 'must convert a file from ASCII to binary' do
+	STL.convert('test/fixtures/ascii_triangle.stl')
+	File.exist?('test/fixtures/ascii_triangle-binary.stl').must_equal true
+	File.delete('test/fixtures/ascii_triangle-binary.stl')
+    end
+
+    it 'must convert a file from binary to ASCII' do
+	STL.convert('test/fixtures/binary_triangle.stl')
+	File.exist?('test/fixtures/binary_triangle-ascii.stl').must_equal true
+	File.delete('test/fixtures/binary_triangle-ascii.stl')
+    end
+
+    describe 'when reading from an ascii file' do
 	subject { STL.read('test/fixtures/triangle.stl') }
 
 	it 'must have a name' do
@@ -29,6 +53,27 @@ describe STL do
 
 	it 'must have a minmax' do
 	    subject.minmax.must_equal [STL::Point[-0.06522903, 23.56532, 7.000382], STL::Point[2.255492, 23.6724, 10]]
+	end
+    end
+
+    describe 'when reading from a binary file' do
+	subject { STL.read('test/fixtures/binary_triangle.stl') }
+
+	it 'must have faces' do
+	    subject.faces.length.must_equal 1
+	    subject.faces.first.must_be_instance_of STL::Face
+	end
+
+	it 'must have a minimum' do
+	    subject.min.must_equal STL::Point[-0.06522902846336365, 23.565319061279297, 7.000381946563721]
+	end
+
+	it 'must have a maximum' do
+	    subject.max.must_equal STL::Point[2.2554919719696045, 23.672399520874023, 10.0]
+	end
+
+	it 'must have a minmax' do
+	    subject.minmax.must_equal [STL::Point[-0.06522902846336365, 23.565319061279297, 7.000381946563721], STL::Point[2.2554919719696045, 23.672399520874023, 10.0]]
 	end
     end
 end

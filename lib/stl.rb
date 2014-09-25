@@ -17,6 +17,39 @@ class STL
     #   @return [String]  The name of the solid, or nil
     attr_accessor :name
 
+    # Check the format of an IO stream that corresponds to an STL file
+    # @param io	[IO]	An open {IO} stream
+    # @return [Bool]	true if the STL file is ASCII formatted
+    def self.ascii?(io)
+	# A binary STL file has an 80 byte header that should never contain
+	#  the word 'solid'. The first non-whitespace characters of an ASCII
+	#  STL file should contain 'solid'.
+	io.gets(80).include?('solid').tap { io.rewind }
+    end
+
+    # Convert an STL file encoding to the other type
+    #  If the input file is ASCII, it will be converted to binary and written to
+    #  the file '<original_filename>-binary.stl'. Likewise, if the file is
+    #  binary, it will be converted and written to the file
+    #  '<original_filename>-ascii.stl'.
+    #  If the optional 'output' argument is provided, it will be used as the
+    #  output filename.
+    # @param filename [String]	The path to the file to convert
+    # @param output   [String]	An optional path to write the converted file to
+    def self.convert(filename, output=nil)
+	File.open(filename, 'r') do |file|
+	    if ascii?(file)
+		output ||= filename.sub(/[-ascii]?\.stl/i, '-binary.stl')
+		stl = STL::Parser.new.parse_ascii(file)
+		write(output, stl.faces, :binary)
+	    else
+		output ||= filename.sub(/[-binary]?\.stl/i, '-ascii.stl')
+		stl = STL::Parser.new.parse_binary(file)
+		write(output, stl.faces, :ascii)
+	    end
+	end
+    end
+
     # Read an STL file
     # @param filename [String]	The path to the file to read
     # @return [STL] the resulting {STL} object
