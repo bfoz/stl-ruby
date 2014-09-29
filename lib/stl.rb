@@ -105,6 +105,14 @@ class STL
 	[min, max]
     end
 
+    # Return a new {STL} object scaled by the given scaling factor
+    def scale(factor)
+	scaled_faces = faces.map do |face|
+	    Face.new(face.normal, *(face.points.map {|v| v*factor}))
+	end
+	self.class.new scaled_faces, min:(min*factor), max:(max*factor)
+    end
+
     # Write the entire model to the given file
     # @param filename   [String]	The path to write to
     # @param format	    [Symbol]    Pass :ascii to write an ASCII formatted file, and :binary to write a binary file

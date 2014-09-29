@@ -76,4 +76,26 @@ describe STL do
 	    subject.minmax.must_equal [STL::Point[-0.06522902846336365, 23.565319061279297, 7.000381946563721], STL::Point[2.2554919719696045, 23.672399520874023, 10.0]]
 	end
     end
+
+    describe 'when scaling' do
+	subject { STL.read('test/fixtures/binary_triangle.stl') }
+
+	it 'must multiply all axes by a scaling factor' do
+	    scaled_stl = subject.scale(2)
+	    scaled_stl.must_be_kind_of STL
+	    subject.faces.zip(scaled_stl.faces) do |a, b|
+		a.points.zip(b.points) do |lhs, rhs|
+		    rhs.must_equal lhs*2
+		end
+	    end
+	end
+
+	it 'must update the max attribute' do
+	    subject.scale(2).max.must_equal subject.max*2
+	end
+
+	it 'must update the min attribute' do
+	    subject.scale(2).min.must_equal subject.min*2
+	end
+    end
 end

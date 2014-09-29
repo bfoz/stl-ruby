@@ -72,6 +72,7 @@ class STL
 	    min = nil
 	    while not io.eof?
 		normal, *vertices = io.read(50).unpack('F3F3F3F3x2').each_slice(3).to_a
+		vertices.map! {|v| Point[v]}
 		faces.push Face.new(Vector[*normal], *vertices)
 
 		# Update the statistics with the new vertices
