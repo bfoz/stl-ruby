@@ -1,5 +1,8 @@
 # STL
 
+[![Build Status](https://travis-ci.org/bfoz/stl-ruby.svg)](https://travis-ci.org/bfoz/stl-ruby)
+[![Gem Version](https://badge.fury.io/rb/stl.svg)](http://badge.fury.io/rb/stl)
+
 Read, write and manipulate both ASCII and binary [STL files](http://en.wikipedia.org/wiki/STL_(file_format))
 
 ## Installation
