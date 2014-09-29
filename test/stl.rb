@@ -106,4 +106,18 @@ describe STL do
 	    subject.scale(2).min.must_equal subject.min*2
 	end
     end
+
+    describe 'when translating' do
+	subject { STL.read('test/fixtures/binary_triangle.stl') }
+
+	it 'must add an Array to all vertices' do
+	    translated_stl = subject.translate([1,2,3])
+	    translated_stl.must_be_kind_of STL
+	    subject.faces.zip(translated_stl.faces) do |a,b|
+		a.points.zip(b.points) do |lhs, rhs|
+		    rhs.must_equal (lhs + [1,2,3])
+		end
+	    end
+	end
+    end
 end

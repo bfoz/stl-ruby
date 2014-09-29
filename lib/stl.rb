@@ -118,6 +118,14 @@ class STL
 	self.class.new scaled_faces, min:(min*factor), max:(max*factor)
     end
 
+    # Translate all vertices by the given amount
+    def translate(offset)
+	translated_faces = faces.map do |face|
+	    Face.new(face.normal, *(face.points.map {|v| v + offset}))
+	end
+	self.class.new translated_faces, min:(min + offset), max:(max + offset)
+    end
+
     # Write the entire model to the given file
     # @param filename   [String]	The path to write to
     # @param format	    [Symbol]    Pass :ascii to write an ASCII formatted file, and :binary to write a binary file
