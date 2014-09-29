@@ -34,6 +34,10 @@ describe STL do
     describe 'when reading from an ascii file' do
 	subject { STL.read('test/fixtures/triangle.stl') }
 
+	it 'must have a center' do
+	    subject.center.must_equal STL::Point[1.095131485, 23.618859999999998, 8.500191000000001]
+	end
+
 	it 'must have a name' do
 	    subject.name.must_equal 'Triangle'
 	end
@@ -58,6 +62,10 @@ describe STL do
 
     describe 'when reading from a binary file' do
 	subject { STL.read('test/fixtures/binary_triangle.stl') }
+
+	it 'must have a center' do
+	    subject.center.must_equal STL::Point[1.0951314717531204, 23.61885929107666, 8.50019097328186]
+	end
 
 	it 'must have faces' do
 	    subject.faces.length.must_equal 1

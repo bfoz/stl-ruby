@@ -1,6 +1,10 @@
 require_relative 'stl/parser'
 
 class STL
+    # @!attribute center
+    #   @return [Point]  The center of the model's bounding box
+    attr_reader :center
+
     # @!attribute faces
     #   @return [Array<Face>]  the list of faces
     attr_reader :faces
@@ -93,6 +97,7 @@ class STL
     end
 
     def initialize(faces, min:nil, max:nil, name:nil)
+	@center = (min + max)/2
 	@faces = faces
 	@max = max
 	@min = min
