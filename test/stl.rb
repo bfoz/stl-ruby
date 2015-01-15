@@ -31,6 +31,12 @@ describe STL do
 	File.delete('test/fixtures/binary_triangle-ascii.stl')
     end
 
+    it 'must process an ASCII file with NaN values' do
+	stl = STL.read('test/fixtures/ascii_nan.stl')
+	stl.must_be_instance_of STL
+	stl.center.must_equal STL::Point[1.095131485, 23.618859999999998, 8.500191000000001]
+    end
+
     describe 'when reading from an ascii file' do
 	subject { STL.read('test/fixtures/triangle.stl') }
 
