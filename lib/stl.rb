@@ -132,4 +132,13 @@ class STL
     def write(filename, format=:binary)
 	self.class.write(filename, faces, format)
     end
+
+    #   @return [Float]  the volume in cube stl units (usually milimeters)
+    def volume
+      vol = 0
+      faces.each do |face|
+        vol = vol + face.signed_volume
+      end
+      vol.abs
+    end
 end
