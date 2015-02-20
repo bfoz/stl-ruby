@@ -66,6 +66,19 @@ describe STL do
 	end
     end
 
+    describe 'when reading a box' do
+	subject { STL.read('test/fixtures/box.stl') }
+
+	it 'face must have a signed volume' do
+	    subject.faces.first.signed_volume.must_equal 1000.0
+	end
+
+	it 'must have a volume' do
+	    subject.volume.must_equal 12000.0
+ 	    subject.scale(2).volume.must_equal 96000.0
+	end
+    end
+
     describe 'when reading from a binary file' do
 	subject { STL.read('test/fixtures/binary_triangle.stl') }
 
